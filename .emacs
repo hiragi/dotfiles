@@ -48,6 +48,9 @@
 ;; 全自動インデント
 ;;(global-set-key "\C-m" 'newline-and-indent)
 
+;; 全選択
+(global-set-key "\C-xa" 'mark-whole-buffer)
+
 ;; かっこを強調表示する
 (show-paren-mode t)
 
@@ -73,8 +76,38 @@
 (setq twittering-use-master-password t)
 
 ;; elscreen
-;; なぜかできない。
-;;(require 'elscreen)
+(load "elscreen" "ElScreen" t)
 
 ;; navi2ch
 (require 'navi2ch)
+
+;; auto-install
+(require 'auto-install)
+(setq auto-install-directory "~/.emacs.d/elisp/")
+(auto-install-update-emacswiki-package-name t)
+(auto-install-compatibility-setup)
+
+;; anything
+(require 'anything)
+(require 'anything-config)
+(add-to-list 'anything-sources 'anything-c-source-emacs-commands)
+(define-key global-map (kbd "C-l") 'anything)
+
+;; c-mode, c++mode
+(add-hook 'c-mode-common-hook
+		  '(lambda ()
+			 ;;; K&Rのスタイルをつかう
+			 (c-set-style "k&r")
+			 ;;; インデントにはタブを使う
+			 (setq indent-tabs-mode t)
+			 ;;; インデント幅
+			 (setq c-basic-offset 4)
+			 ))
+
+(setq auto-mode-alist
+	  ;;; 拡張子とモードの対応
+	  (append
+	   '(("\\.c$" . c-mode))
+	   '(("\\.h$" . c-mode))
+	   '(("\\.cpp$" . c++mode))
+	   auto-mode-alist))
