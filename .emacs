@@ -111,3 +111,15 @@
 	   '(("\\.h$" . c-mode))
 	   '(("\\.cpp$" . c++mode))
 	   auto-mode-alist))
+
+;; 自動セーブを無効にする設定
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+
+;; google日本語入力
+(require 'mozc)
+(set-language-environment "japanese")
+(setq default-input-method "japanese-mozc")
+
+;; 起動時メッセージを表示しない
+(setq inhibit-startup-message t)
