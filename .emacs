@@ -109,7 +109,7 @@
 	  (append
 	   '(("\\.c$" . c-mode))
 	   '(("\\.h$" . c-mode))
-	   '(("\\.cpp$" . c++mode))
+	   '(("\\.cpp$" . c++-mode))
 	   auto-mode-alist))
 
 ;; 自動セーブを無効にする設定
@@ -123,3 +123,4 @@
 
 ;; 起動時メッセージを表示しない
 (setq inhibit-startup-message t)
+
