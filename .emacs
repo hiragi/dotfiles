@@ -110,6 +110,7 @@
 	   '(("\\.c$" . c-mode))
 	   '(("\\.h$" . c-mode))
 	   '(("\\.cpp$" . c++-mode))
+	   '(("\\.cc$" . c++-mode))
 	   auto-mode-alist))
 
 ;; 自動セーブを無効にする設定
