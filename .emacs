@@ -125,3 +125,40 @@
 ;; 起動時メッセージを表示しない
 (setq inhibit-startup-message t)
 
+;; 2012/02/05
+;; php-mode
+(load-library "php-mode")
+(require 'php-mode)
+
+(add-hook 'php-mode-user-hook
+		  '(lambda()
+			 (setq tab-width 2)
+			 (setq indent-tabs-mode nil))
+		  )
+
+;; 2012/02/06
+(add-hook 'ruby-mode-hook
+		  '(lambda ()
+			 (setq tab-width 4)
+			 (setq indent-tabs-mode 't)
+			 (setq ruby-indent-level tab-width)
+))
+
+;; 2012/03/20
+(global-set-key "\M-g" 'goto-line)
+
+;; 2012/04/14
+;; vbnet-modeの読み込み
+(require 'vbnet-mode)
+(add-to-list 'auto-mode-alist '("\\.vbs$" . vbnet-mode)) ; .vbsに関連付け
+;; auto-completeの対象にする
+(add-to-list 'ac-modes 'vbnet-mode)
+
+;; ハイライトがうまくいかない？
+(load-library "visual-basic-mode")
+(add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode))
+
+;; 2012/05/20 Added
+(require 'insert-time-date)
+(require 'hiragi_test)
+(global-set-key "\C-r" 'hiragi_test)
