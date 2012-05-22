@@ -1,0 +1,77 @@
+ls
+ls ..
+uptime
+ls
+sl
+clear
+uptime
+last
+exit
+ruby algea.rb 
+exit
+ruby program.rb 
+exit
+ruby program.rb 
+exit
+exit
+cd 
+ls
+cd .emacs.d/
+ls
+cd elisp/
+git init
+git add *
+git commit -m "first commit"
+ls
+vim hiragi_test.el 
+ls
+clearamazon.elc                    auto-complete.el        navi2ch-list.el
+ls
+ls
+git add *
+ls
+git commit -m "first commit"
+cd ..
+cd -
+cd ..
+cd ..
+git add .emacs
+git commit -m "modified"
+git push -u origin master
+git add .emacs
+git commit -m "first commit"
+git init
+git add .emacs
+git commit -m "first commit"
+git add .emacs
+git status
+git remote add origin git@github.com:hiragi/.git
+git push -u origin master
+locate dotfiles
+cp .emacs github/dotfiles/.emacs
+cd github/dotfiles/
+git add .emacs 
+git commit -m "modified"
+git push -u origin master
+git pull
+ls
+cd ~
+cp .emacs github/dotfiles/.emacs
+cp .bashrc github/dotfiles/.bashrc
+cd -
+git add *
+git commit -m "first commit"
+git push -u origin master
+ls
+echo $SHLVL
+ls
+ll .screenrc 
+ls -l screenrc
+ls -l .screenrc 
+sudo chmod +r .screenrc
+ls -l .screenrc 
+sudo chmod 335 .screenrc 
+ls -l  .screenrc 
+sudo chmod 662 .screenrc 
+ls -l screenrc
+ls -l .screenrc 
