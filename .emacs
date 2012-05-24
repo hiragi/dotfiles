@@ -159,6 +159,39 @@
 (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode))
 
 ;; 2012/05/20 Added
-(require 'insert-time-date)
+
 (require 'hiragi_test)
 (global-set-key "\C-r" 'hiragi_test)
+
+;; (18:03 2012/05/22)
+(require 'insert-time-date)
+(global-set-key "\C-x\C-t" 'insert-time-date)
+
+(split-window-horizontally)
+
+;; 起動時にeshell起動
+(other-window 1)
+(add-hook 'after-init-hook (lambda() (eshell)))
+
+;; eshell設定ファイル
+(when (locate-library "eshell")
+  (setq eshell-directory-name (expand-file-name "~/.eshell/init.el"))
+
+  (load "~/.eshell/init.el")
+)
+
+;; Todoリストを作った (2012/05/22 20:29)
+(require 'todo)
+(global-set-key "\C-xt" 'todo) 
+
+;; Open maze argorithm
+(require 'maze)
+
+;; カッコ補完 
+;; やっぱやめた
+;;(global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+;;(global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+;;(global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+;;(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+;;(setq skeleton-pair 1)
+
