@@ -35,18 +35,24 @@
 ;; Ruby保管 出来無いっぽ
 ;; (require 'ruby-electric)
 
-;; 起動時ウインドウ分割 2012/05/22
-(split-window-vertically)
+;; 起動時うぃんどう分割
+(add-hook 'after-init-hook (lambda()
+							      (setq w(selected-window))
+								       (setq w2(split-window w (- (window-height w) 20)))
+									        (select-window w2)
+											     (eshell)
+												      (select-window w)))
 
-;; 起動時eshell起動 2012/05/22
-(setq inhibit-startup-screen t)
-(other-window 1)
-(eshell)
+;; 起動時の画面はいらない
+(setq inhibit-startup-message t)
 
-;; 起動時のフレームサイズ
+;; 起動時のsize, position, font
 (setq initial-frame-alist
       (append (list
-	       '(width . 128 )
-	       '(height . 61)
-	       )
-	      initial-frame-alist))
+			          '(width . 80)
+					         '(height . 60)
+							        '(top . 0)
+									       '(left . 0)
+										          )
+			        initial-frame-alist))
+(setq default-frame-alist initial-frame-alist)
