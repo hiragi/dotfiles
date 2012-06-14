@@ -17,7 +17,8 @@ if [ $SHLVL = 1 ]; then
 	byobu
 fi
 
-alias ll="ls-l"
+alias ls="ls --color=auto"
+alias ll="ls -l"
 alias la="ls -a"
 alias em="emacs"
 
