@@ -1,0 +1,1 @@
+/home/hiragi/.emacs.d
