@@ -4,8 +4,26 @@
 (define-key global-map "\C-z" 'undo)
 (define-key global-map "\C-c;" 'comment-region)
 (define-key global-map "\C-c:" 'uncomment-region)
+(define-key global-map (kbd "C-x C-n") 'split-window-horizontally)
+
+
 ;;; 日本語入力切替
-(define-key global-map "\C-o" 'toggle-input-method)
+;; (define-key global-map "\C-o" 'toggle-input-method)
+
+;; 漢字だけ文字化けする。
+;;(require 'un-define)
+(coding-system-put 'utf-8 'category 'utf-8)
+(set-language-info
+  "Japanese"
+  'coding-priority (cons 'utf-8 (get-language-info "Japanese" 'coding-priority)))
+
+(set-language-environment "Japanese")
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+
+
 (mouse-wheel-mode t)
 (setq mouse-wheel-follow-mouse t)
 (tool-bar-mode 0)
@@ -14,6 +32,7 @@
 ;;; ばっくあっぷふぁいるを作らない。
 (setq backup-inhibited t)
 (setq delete-auto-save-files t)
+
 (set-scroll-bar-mode 'right)
 ;;; 最終行に必ず一行挿入する
 (setq require-final-newline t)
@@ -34,11 +53,20 @@
 ;;; まず、install-elispのコマンドを使えるようにします。
 (require 'install-elisp)
 ;;; 次に、Elispファイルをインストールする場所を指定します。
-(setq install-elisp-repository-directory "./elisp")
+(setq install-elisp-repository-directory "~/.emacs.d/elisp")
 
 ;; auto-complete
 (require 'auto-complete)
 (global-auto-complete-mode t)
+
+;; package.elの設定
+(when (require 'package nil t)
+  ;; パッケージリポジトリにMarmaladeと開発者運営のELPAを追加
+  (add-to-list 'package-archives
+			   '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  ;; インストールしたパッケージにロードパスを通して読みこむ
+  (package-initialize))
 
 ;; Wanderlustの設定。
 (load "mime-setup")
@@ -49,7 +77,10 @@
 ;;(global-set-key "\C-m" 'newline-and-indent)
 
 ;; 全選択
-(global-set-key "\C-xa" 'mark-whole-buffer)
+;;(global-set-key "\C-xa" 'mark-whole-buffer)
+
+;; align-regexp
+(global-set-key (kbd "C-x a") 'align-regexp)
 
 ;; かっこを強調表示する
 (show-paren-mode t)
@@ -58,8 +89,8 @@
 ;; (setq c-auto-newline t)
 
 ;; 行番号
-(require 'linum)
-(global-linum-mode)
+;;(require 'linum)
+;;(global-linum-mode)
 
 ;; 指定した行番号にワープ
 ;;(global-set-key "\C-x:" 'goto-line)
@@ -83,14 +114,14 @@
 
 ;; auto-install
 (require 'auto-install)
-(setq auto-install-directory "./elisp")
+(setq auto-install-directory "~/.emacs.d/elisp")
 (auto-install-update-emacswiki-package-name t)
 (auto-install-compatibility-setup)
 
 ;; anything
 (require 'anything)
 (require 'anything-config)
-(add-to-list 'anything-sources 'anything-c-source-emacscommands)
+;(add-to-list 'anything-sources 'anything-c-source-emacscommands)
 (define-key global-map (kbd "C-l") 'anything)
 
 ;; c-mode, c++mode
@@ -114,8 +145,8 @@
 	   auto-mode-alist))
 
 ;; 自動セーブを無効にする設定
-(setq make-backup-files nil)
-(setq auto-save-default nil)
+;;(setq make-backup-files nil)
+;;(setq auto-save-default nil)
 
 ;; google日本語入力
 (require 'mozc)
@@ -143,6 +174,11 @@
 			 (setq indent-tabs-mode 't)
 			 (setq ruby-indent-level tab-width)
 ))
+
+;; endに対応する行のハイライト
+(when (require 'ruby-block nil t)
+  (setq ruby-block-highlight-toggle t))
+
 ;; */*/*/*--- 2012/06/23 10:43 ---*/*/*/*
 (setq ruby-deep-indent-paren-style nil)
 
@@ -174,7 +210,8 @@
 
 ;; 起動時にeshell起動
 (other-window 1)
-(add-hook 'after-init-hook (lambda() (eshell)))
+;;(add-hook 'after-init-hook (lambda() (eshell)))
+(add-hook 'after-init-hook (lambda () (multi-term)))
 
 ;; eshell設定ファイル
 (when (locate-library "eshell")
@@ -266,3 +303,93 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
+
+;; "C-t" でウィンドウを切り替える。初期値はtranspose-chars
+;; (define-key global-map (kbd "C-t") 'other-window)
+
+(column-number-mode t)
+(size-indication-mode t)
+
+;; リージョン内の行数と文字列をモードラインに表示する
+(require 'count-lines-and-chars)
+(add-to-list 'default-mode-line-format
+			 '(:eval (count-lines-and-chars)))
+
+;; ハイライト設定
+(defface my-hl-line-face
+  ;; 背景がdarkならば背景色を紺に
+  '((((class color) (background dark))
+	 (:background "NavyBlue" t))
+	;; 背景がlightならば背景色を緑に
+	(((class color) (background light))
+	 (:background "LightGoldenrodYellow" t))
+	(t (:bold t)))
+  "hl-line's my face")
+
+(setq hl-line-face 'my-hl-line-face)
+(global-hl-line-mode t)
+
+;; ファイルが#!から始まる場合、+xをつけて保存する
+(add-hook 'after-save-hook
+		  'executable-make-buffer-file-executable-if-script-p)
+
+;; emacs-lisp-modeのフックをセット
+(add-hook 'emacs-lisp-mode-hook
+		  '(lambda ()
+			 (when (require 'eldoc nil t)
+			   (setq eldoc-idle-delay 0.2)
+			   (setq eldoc-echo-area-use-multiline-p t)
+			   (turn-on-eldoc-mode))))
+
+;; eval-last-sexp変更
+(define-key global-map (kbd "C-x j") 'eval-last-sexp)
+
+;; redo+の設定
+(when (require 'redo+ nil t)
+  ;; C-u にRedoを割り当てる
+  (global-set-key (kbd "C-u") 'redo))
+
+;; color-moccurの設定
+(when (require 'color-moccur nil t)
+  ;; M-oにoccur-by-occurを割り当て
+  (define-key global-map (kbd "M-o") 'occur-by-moccur)
+  ;; スペース区切りでAND検索
+  (setq occur-split-word t)
+  ;; ディレクトリ検索のとき除外するファイル
+  (add-to-list 'dmoccur-exclusion-mask "\\.DS_Store")
+  (add-to-list 'dmoccur-exclusion-mask "^#.+#$")
+  ;; Migemoを利用できる環境であればMigemoを使う
+  (when (and (executable-find "cmigemo")
+			 (require 'migemo nil t))
+	(setq moccur-use-migemo t)))
+
+;; moccur-editの設定
+(require 'moccur-edit nil t)
+
+(require 'org-install)
+
+
+;; Ruby用Flymake
+(require 'flymake)
+(defun flymake-ruby-init ()
+  (list "ruby" (list "-c" (flymake-init-create-temp-buffer-copy
+						   'flymake-create-temp-inplace))))
+(add-to-list 'flymake-allowed-file-name-masks
+			 '("\\.rb\\'" flymake-ruby-init))
+(add-to-list 'flymake-err-line-patterns
+			 '("\\.*\\):(\\[0-9]+\\)): \\(.*\\)" 1 2 nil 3))
+
+
+;; SQLサーバ接続
+(setq sql-user "root"
+	  sql-database "information_schema"
+	  sql-server "localhost"
+	  sql-product "mysql")
+
+;; GitフロントエンドEggの設定
+(when (executable-find "git")
+  (require 'egg nil t))
+
+(when (require 'multi-term nil t)
+  (setq multi-term-program "/usr/bin/zsh"))
+
