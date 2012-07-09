@@ -23,7 +23,7 @@ alias la="ls -a"
 alias em="emacs"
 
 
-setopt correct
+#setopt correct
 setopt autocd
 setopt auto_pushd
 setopt list_packed
@@ -46,3 +46,14 @@ export LS_COLORS='di=01;36'
 
 # cdしたらlsする。
 function chpwd() { ls }
+
+# go
+export GOROOT=$HOME/go
+export GOOS=linux
+export GOARCH=386
+export GOBIN=$HOME/go/bin
+
+export PATH=$PATH:$GOBIN
+
+export PATH=$PATH:/usr/local/coffeescript/bin
+export PATH=$PATH:/usr/local/mongoDB/bin
