@@ -21,7 +21,8 @@ alias ls="ls --color=auto"
 alias ll="ls -l"
 alias la="ls -a"
 alias em="emacs"
-
+alias watch="watch --differences=cumulative"
+alias price="/home/hiragi/python/mywork/hiragi/pricedata/pricedata"
 
 #setopt correct
 setopt autocd
@@ -57,3 +58,4 @@ export PATH=$PATH:$GOBIN
 
 export PATH=$PATH:/usr/local/coffeescript/bin
 export PATH=$PATH:/usr/local/mongoDB/bin
+export EDITOR=/usr/bin/emacs
