@@ -23,6 +23,7 @@ alias la="ls -a"
 alias em="emacs"
 alias watch="watch --differences=cumulative"
 alias price="/home/hiragi/python/mywork/hiragi/pricedata/pricedata"
+alias touchd="touch `date +%Y%m%d%H%M.txt`"
 
 #setopt correct
 setopt autocd
@@ -59,3 +60,6 @@ export PATH=$PATH:$GOBIN
 export PATH=$PATH:/usr/local/coffeescript/bin
 export PATH=$PATH:/usr/local/mongoDB/bin
 export EDITOR=/usr/bin/emacs
+
+
+
