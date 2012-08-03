@@ -21,9 +21,12 @@ alias ls="ls --color=auto"
 alias ll="ls -l"
 alias la="ls -a"
 alias em="emacs"
+alias emq="emacs -q"
 alias watch="watch --differences=cumulative"
 alias price="/home/hiragi/python/mywork/hiragi/pricedata/pricedata"
 alias touchd="touch `date +%Y%m%d%H%M.txt`"
+alias dict="/home/hiragi/hiragi/study/dictionary/bin/search.rb"
+alias ws="clear && ruby /home/hiragi/hiragi/study/dictionary/bin/weblio.rb"
 
 #setopt correct
 setopt autocd
