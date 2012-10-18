@@ -431,3 +431,6 @@
 	(other-window 1)
 	(set-window-buffer thiswind (window-buffer))
 	(set-window-buffer (selected-window) thisbuf)))
+
+;; */*/*/*--- 2012/10/19 01:29 ---*/*/*/*
+(setq inferior-lisp-program "clisp")
