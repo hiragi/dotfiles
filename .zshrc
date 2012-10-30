@@ -26,7 +26,9 @@ alias watch="watch --differences=cumulative"
 alias price="/home/hiragi/python/mywork/hiragi/pricedata/pricedata"
 alias touchd="touch `date +%Y%m%d%H%M.txt`"
 alias dict="/home/hiragi/hiragi/study/dictionary/bin/search.rb"
-alias ws="clear && ruby /home/hiragi/hiragi/study/dictionary/bin/weblio.rb"
+alias weblio="clear && ruby /home/hiragi/hiragi/study/dictionary/bin/weblio.rb"
+alias longman="clear && gosh /home/hiragi/gosh/work/dictionary.scm"
+alias sendfile="python /home/hiragi/python/gmail/sendfile.py"
 
 #setopt correct
 setopt autocd
@@ -64,5 +66,6 @@ export PATH=$PATH:/usr/local/coffeescript/bin
 export PATH=$PATH:/usr/local/mongoDB/bin
 export EDITOR=/usr/bin/emacs
 
-
-
+# CLASSPATH
+CLASSPATH=:/usr/share/java/junit4-4.8.2.jar
+export CLASSPATH
