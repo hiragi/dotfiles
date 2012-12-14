@@ -17,11 +17,15 @@
   "Japanese"
   'coding-priority (cons 'utf-8 (get-language-info "Japanese" 'coding-priority)))
 
-(set-language-environment "Japanese")
+;; デフォルトの文字コード
+;(set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
 
 
 (mouse-wheel-mode t)
@@ -150,7 +154,7 @@
 
 ;; google日本語入力
 (require 'mozc)
-(set-language-environment "japanese")
+(set-language-environment 'utf-8)
 (setq default-input-method "japanese-mozc")
 
 ;; 起動時メッセージを表示しない
@@ -297,12 +301,6 @@
 
 ;; F4 で tabbar-mode(global-set-key [f4] 'tabbar-mode)
 
-;; デフォルトの文字コード
-(set-default-coding-systems 'utf-8)
-(prefer-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
 
 ;; "C-t" でウィンドウを切り替える。初期値はtranspose-chars
 ;; (define-key global-map (kbd "C-t") 'other-window)
@@ -434,3 +432,11 @@
 
 ;; */*/*/*--- 2012/10/19 01:29 ---*/*/*/*
 (setq inferior-lisp-program "clisp")
+;(setq inferior-lisp-program "slime")
+
+;; */*/*/*--- 2012/10/23 16:03 ---*/*/*/*
+(require 'magit)
+
+(require 'sudoku)
+
+(setq-default tab-width 4 indent-tabs-mode nil)
