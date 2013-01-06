@@ -216,6 +216,8 @@
 (other-window 1)
 ;;(add-hook 'after-init-hook (lambda() (eshell)))
 (add-hook 'after-init-hook (lambda () (multi-term)))
+(other-window 0)
+(add-hook 'after-init-hook (lambda () (slime)))
 
 ;; eshell設定ファイル
 (when (locate-library "eshell")
@@ -431,8 +433,15 @@
 	(set-window-buffer (selected-window) thisbuf)))
 
 ;; */*/*/*--- 2012/10/19 01:29 ---*/*/*/*
-(setq inferior-lisp-program "clisp")
-;(setq inferior-lisp-program "slime")
+(add-to-list 'load-path "~/.emacs.d/slime-2012-12-31")
+;(setq inferior-lisp-program "clisp")
+(setq inferior-lisp-program "sbcl")
+(require 'slime)
+(slime-setup)
+
+(require 'ac-slime)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 ;; */*/*/*--- 2012/10/23 16:03 ---*/*/*/*
 (require 'magit)
@@ -440,3 +449,10 @@
 (require 'sudoku)
 
 (setq-default tab-width 4 indent-tabs-mode nil)
+
+(set-language-environment "Japanese")
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
