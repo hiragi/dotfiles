@@ -337,7 +337,7 @@
   `(defcommand ,name () ()
      (run-or-raise (format nil "google-chrome ~s -incognito" ,url) '(:class "g-chrome"))))
 
-(defbookmark hanwa-moneyforward "https://expense.moneyforward.com/")
+(defbookmark hanwa-moneyforward "https://expense.moneyforward.com/expense_report_units")
 (defbookmark kadaiseisaku.com "https://xn--2qq74i47uwm5a.com/")
 (defbookmark render.com "https://dashboard.render.com/")
 (defbookmark supabase "https://supabase.com/dashboard/projects")
