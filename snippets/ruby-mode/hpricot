@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: hpricot
+# key: hpricot
+# binding: direct-keybinding
+# --
+require 'hpricot'
+require 'open-uri'
+
+def scrape(url)
+  doc = Hpricot(open(url))
+end

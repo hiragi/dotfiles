@@ -1,0 +1,1 @@
+/home/hiroaki/dotfiles/mycustom.zsh

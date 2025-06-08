@@ -1,0 +1,76 @@
+(post-esa
+ 558
+ "/2020/04/25"
+ "大石裕明"
+ "
+
+## 今日やったこと
+- [x] (土日にやる)Ubuntu20.04LTSをインストール（DVD-R、CD読み込みデバイスを買う）。
+
+## これからやること（上から）
+- [ ] (~~4/24まで~~土日にやる)輸送のシステム化について調べる
+- [ ] (土日にやる)事業KPIの設定
+  - [ ] 事業計画書の練り直し。
+  - [ ] KPIツリーの書き直し
+- [ ] (土日にやる)`sheetmetal_costing_spec.rb`をesaに仕様書として投稿する。
+- [ ] (土日にやる)parserをJava->Clojureに書き換え。
+- [ ] (4/30まで)投資家MTG資料をreveal.jsで書き直す。
+- [ ] (4/30まで)自動で製図できるようにする。
+- [ ] SolidworksのCostingをWebAPIにできないか実験
+- [ ] assets.catallaxy.meの作成
+  - [ ] 契約書のmdが出来たら自動でpdfを吐き出すようにする。
+  - [ ] reveal.jsで投資家・営業用資料書き直し。
+  - [ ] reveal.jsをbootstrap込で書き直す？
+  - [ ] SHOTSTACKを試してみる（ビデオ編集API）。
+  - [ ] anime.jsを試してみる。
+- [ ] (GWにやる)hubotたてる。
+  - Slack modal 試す https://api.slack.com/surfaces/modals/using
+  - [ ] お断りしますをslackで作る
+  - [ ] 工場登録をbot化する
+- [ ] (GWにやる)人工呼吸器、マスク、消毒剤などのassemblyファイルを作成する(Mitsuri Maker: Lasersaur、ミスミを参考に)。
+  - [ ] PRTimesで告知する。
+- [ ] (GWにやる)ClojureでOpenSCADをいじる
+- [ ] [売上管理シート](https://docs.google.com/spreadsheets/d/1RCIyI6bJw0DdOzIP2Gm5Qu_huCKc83qZbMc-kaNZU58/edit#gid=0)をMetabaseに移す。
+
+## アクティビティログ
+* [times](https://catallaxy-dev.slack.com/archives/CJP8U5KFU)
+* [esa](https://catallaxy.esa.io/members/hiroakiohishi)
+* [GitHub - CAD解析API](https://github.com/catallaxy-dev/cad_analyzer_api/commits?author=hiragi)
+* [GitHub - 見積りAPI](https://github.com/catallaxy-dev/mitsuri_estimate/commits/master?author=hiragi)
+
+## 所感
+環境設定完了。
+"
+ "true")
+
+
+大石: 事業計画書
+木南: 売上高管理シート
+のように責任区分を分ける？
+## ゲームのように仕事もやる
+## 受身だと仕事が減っていく
+1人1人が属人的にトップダウンでやった方が早い。
+## 素直であること
+わからないことをわからないと言う
+## 感染状況
+## リーダーシップ
+
+
+GitHub
+福留康介
+
+Prtimes google
+明日東京の天気
+googler-mode emacs
+
+新型コロナウイルス
+
+libxml2 eww
+
+https://api.new
+
+
+;; TODO
+- [ ] scratch.txtをscratch.cljに移す？
+- [ ] post to slackを実装してタスク管理を簡単にする。
+- [ ] api.newをemacs上から簡単に作れるようにする。

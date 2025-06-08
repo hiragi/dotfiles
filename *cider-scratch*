@@ -1,0 +1,65 @@
+(require '[clj-http.client :as client]
+         '[cheshire.core :as c]
+         '[clj-time.core :as t]
+         '[clj-time.format :as f])
+
+(def *api-key* "AIzaSyAhLt0fv84mak_gxuVSLnyaHDl8f4PSAVw")
+(def *url*
+  (str "https://sheets.googleapis.com/v4/spreadsheets/112BhFGlR6dtgo7N_T_tQd9XN22AUAeBmOalRWOy8zr0/values/!A1:Z9999?key=" *api-key*))
+
+(def *email-name-map*
+  {"ohishi@catallaxy.me" "大石裕明"
+   "asanuma@catallaxy.me" "浅沼秀平"
+   "goto-t@catallaxy.me" "後藤拓也"
+   "ueno@catallaxy.me" "上野徳識"
+   "maekawa@catallaxy.me" "前川和也"
+   "kubota@catallaxy.me" "久保田英明"
+   "ohtani@catallaxy.me" "大谷充宏"
+   })
+
+(defn remove-公開 [string]
+  (clojure.string/replace string "（公開）" ""))
+
+(defn yesterday? [date]
+  (let [formatter (f/formatter "yyyy/MM/dd HH:mm:ss")
+        date (f/parse formatter date)
+        yesterday (t/minus (t/now) (t/days 1))]
+
+    (and (= (.getYear date) (.getYear yesterday))
+         (= (.getMonthOfYear date) (.getMonthOfYear yesterday))
+         (= (.getDayOfMonth date) (.getDayOfMonth yesterday)))))
+
+
+(defn get-date [array]
+  (let [formatter (f/formatter "yyyy/MM/dd HH:mm:ss")]
+    (->
+     (filter (fn [x]
+               (try
+                 (f/parse formatter x)
+                 (catch Exception e false)))
+             array)
+     first)))
+
+(defn flash-file [] (spit "/tmp/text.md" nil))
+
+(do
+  (flash-file)
+  (let [body-string (:body (client/get *url*))
+        values (->
+                body-string
+                c/decode
+                (get "values"))
+        row (first values)
+        data (rest values)]
+    (doseq [data data]
+      (let [resultset (map vector row data)]
+        (doseq [result resultset]
+          (let [key (remove-公開 (first result))
+                val (last result)]
+            (when-let [date (-> resultset flatten get-date)]
+              (when (yesterday? date)
+                (cond (= key "メールアドレス") (spit "/tmp/text.md" (str "## " (get *email-name-map* val) "\n\n") :append true)
+                      (not (or
+                            (= key "今日のMVPを最大2人まで選んでください（非公開）")
+                            (= key "タイムスタンプ"))) (spit "/tmp/text.md" (str "### " key "\n" val "\n\n") :append true)
+                      :else nil)))))))))

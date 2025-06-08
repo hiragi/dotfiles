@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: fwrite
+# key: fwrite
+# binding: direct-keybinding
+# --
+(with-open-file (out "$1" :direction :output)
+  $2)

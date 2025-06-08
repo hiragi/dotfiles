@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: nippo
+# key: nippo
+# binding: direct-keybinding
+# --
+(send-nippo
+"
+おつかれさまです。大石です。
+
+本日の日報を提出します。
+
+【やったこと】
+https://its.actindi.net/activity?user_id=93
+https://github.com/actindi-dev/outing/commits?author=hiragi
+$1
+
+【次回の予定】
+https://its.actindi.net/issues?per_page=50&query_id=43
+
+【所感】
+$3
+")$4

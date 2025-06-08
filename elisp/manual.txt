@@ -1,0 +1,411 @@
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes"))
+
+(message "He saw %d %s"
+		 (- fill-column 34)
+		 (concat "red "
+		 		 (substring
+						"The quick brown foxes jumped." 16 21)
+							 " leaping."))
+
+(set 'carnivores '(lion tiger loapard))
+(setq carnivores '(lion tiger loapard))
+
+;; 複数
+(setq trees '(pine fir oak maple)
+	  harbivores '(gazelle antelope zebra))
+
+Lispプログラムは式から成り立ち、式とはリストやアトムである。 
+
+リストは、0個以上のアトムやリストを空白で区切って括弧で囲ったものである。リストは空でもよい。 
+
+アトムとは、forward-paragraphのような複数個の文字のシンボル、 +のような1文字のシンボル、二重引用符で囲った文字列、あるいは、数である。
+
+buffer-nameとbuffer-file-nameが、ファイルとバッファの違いを示してくれる
+(buffer-name)
+(buffer-file-name)
+
+(other-buffer)
+(switch-to-buffer (other-buffer))
+;; 文字数を返す
+(buffer-size)
+(point)
+
+;; defの(interactive)について
+M-xに続けて関数名を入力したり、適当なキー列をタイプして使えるように、関数を対話的にするための式。省略できる。 
+
+(defun multiply-by-seven (number)
+	   "Multiply NUMBER by seven."
+	   (* 7 number))
+(multiply-by-seven 4)
+
+(interactive "p") ; 対話的
+interactive には複数のオプションがある
+
+;; ローカル変数宣言 let
+(let ((zebra 'stripes)
+      (tiger 'fierce))
+  (message "One kind of animal has %s and another is %s."
+     zebra tiger))
+
+;; let式において特に初期値を束縛していない変数には、自動的に初期値としてnilを束縛する。
+(let ((birch 3)
+      pine
+      fir
+      (oak 'some))
+  (message
+   "Here are %d variables with %s, %s, and %s value."
+   birch pine fir oak))
+
+;; if
+(if (> 5 4)
+    (message "5 is greater than 4"))
+
+(defun type-of-animal (characteristic)
+  "Print message in echo area depending on CHARACTERICTIC. If the characteristic is the symbol 'fierce', then warn of a tiger."
+  (if (equal characteristic 'fierce)
+      (message "It's a tiger!"))) ;; 対話的関数の雛型ではない。 
+
+;; 判定式
+(equal "a" "a")
+
+
+;; マークをつけた場所に戻る
+\C-x\C-x
+
+(defun simplified-beginning-of-buffer ()
+	   "Move point to the beginning of the buffer ;
+	   leave mark at previous position."
+	   (interactive)
+	   (push-mark)
+	   (goto-mark (point-min)))
+
+;; mark-whole-buffer の完全なコード
+(defun mark-whole-buffer ()
+	   "Put point at beginning and mark at end of buffer"
+	   (interactive)
+	   (push-mark (point))
+	   (push-mark (point-max))
+	   (goto-char (point-min)))
+
+;; append-to-buffer の完全なコード
+(defun append-to-buffer (buffer start end)
+	   "Append to specified buffer the text of the region.
+	   It is inserted into that buffer before its point.
+
+	   When calling from a problem, give three arguments;
+	   a buffer or the name of one, and two character numbers
+	   specifying the portion of the current buffer to be copied"
+	   (interactive	"Append to buffer:\nr")
+	   (let ((oldbuf (current-buffer)))
+	   		(save-excursion
+				(set-buffer (get-buffer-create buffer))
+				(insert-buffer-substring oldbuf start end))))
+
+;; copy-to-buffer の本体
+(defun copy-to-buffer ()
+	   ""
+	   (interactive "BCopy to buffer: \nr")
+	   (let ((oldbuf (current-buffer)))
+	   (save-excursion
+		(set-buffer (get-buffer-create buffer))
+		(erase-buffer)
+		(save-excursion
+				(insert-buffer-substring oldbuf start end)))))
+
+;; insert-buffer の完全なコード
+(defun insert-buffer (buffer)
+	   "Insert after point the contents of BUFFER.
+	   Puts mark after the inserted text.
+	   BUFFER may be a buffer or a buffer name."
+	   (interactie "*bInsert buffer: ") ;; 既存のバッファであるか、バッファ名であることをLispインタプリタに指示
+	   (or (bufferp buffer) ;; 引数bufferがバッファの名前ではなく、バッファに束縛されていることを保障する
+	   	   (setq buffer (get-buffer buffer)))
+	   (let (start end newmark) ;; let式の本体は、別のバッファからカレントバッファにコピーするコード
+	   		(save-excursion
+				(save-excursion
+						(set-buffer buffer
+									(seqt start (point-min) end (point-max)))
+						(insert-buffer-substring buffer start end)
+						(setq newmark (point)))
+				(setq newmark (point)))
+			(pushmark newmark)))
+
+
+;; p'をそのように使うのは、 関数が述語（predicate）であることを意味する慣習である。 また、述語とは、ある性質が真であるか偽であるかを調べる関数であった。 
+
+;; 関数orは、任意個数の引数をとる。各引数を順番に評価し、nil以外の値を返した最初の引数の値を返す。nil以外の引数がはじめて返されると、それより後ろの引数をいっさい評価しない。
+(or (bufferp buffer)
+	(setq buffer (set-buffer buffer)))
+
+(save-excursion
+		(set-buffer buffer) ;; Emacsの注意をカレントバッファからテキストのコピー元のバッファに向ける
+		(setq start (point-min) end (point-max))) ;; バッファの先頭と最後を変数startとendに設定する。
+
+;; save-excursionは、ポイントとマークの位置を記録してから、関数の本体を実行し、ポイントやマークの位置が移動していれば実行前の状態に復元する。この関数の主要な目的は、ポイントやマークの予期しない移動によって、ユーザが混乱したり煩わされないようにすることである。
+
+;; beginning-of-bufferの完全なテキスト
+(defun beginning-of-buffer (&optional arg)
+	   "Move point to the beginning of the buffer"
+	   (interactive "P")
+	   (push-mark)
+	   (goto-char
+		(if arg
+			(if (> (buffer-size) 10000)
+				;; Avoid overflow for large buffer sizes!
+				(* (prefix-numeric-value arg)
+				   (/ (buffer-size) 10))
+				(/ (+ 10 (* (buffer-size)
+				   	  	 	(prefix-numeric-value arg)))
+							10))
+			(point-min)))
+		(if arg (forward-line 1)))
+
+
+;; &optional: 関数定義に引数を省略できることを表すキーワード
+;; prefix-numeric-value: (interactive "P")で得た「生の前置引数」を数値に変換
+
+;; forward-line: ポイントを次の行の先頭に移動する
+
+;; erase-buffer: カレントバッファの全内容を削除する
+
+;; bufferp: 引数がバッファならtを、さもなければnilを返す。
+
+;; what-lineの全コード
+(defun what-line ()
+	   "Print the current line number (in the buffer) of point."
+	   (interactive)
+	   (save-restriction)
+		(widen)
+		(save-excursion
+				(beginning-of-line)
+					(message "Line %d"
+							 (1+ (count-lines 1 (point))))))
+
+;; スペシャルフォームsave-restrictionは、カレントバッファに設定されているナロイングを記録し、save-restrictionのコードを評価したあと、記録したナロイングを復元する
+
+;; widen: what-lineが呼ばれたときにカレントバッファに記録されているナロイングを無効にする
+
+
+
+;; Lispでは、car, cdr, consは基本関数である。関数consはリストの作成、関数car, cdrはリストの分解に使う。
+
+cons: construct
+car: Contents of the Address part of the Register
+cdr: Contents of the Decrement part of the Register
+
+(car '(rose violet daisy buttercup)) ; rose
+;; car: 先頭要素を返す
+;; cdr: リストの残り
+
+(cdr '(rose violet daisy buttercup)) ; violet daisy buttercup
+
+(car '((lion tiger cheetah)
+	   (gazelle antelope zebra)
+	   (whale dolphine seal))) ; (lion tiger cheetah)
+
+(cdr '((lion tiger cheetah)
+	   (gazelle antelope zebra)
+	   (whale dolphine seal))) ; (gazelle antelope zebra) (whale dolphile seal)
+
+(cons 'pine '(fir oak maple)) ; (pine fir oak maple)
+
+(cons 'buttercup ())
+(cons 'daisy '(buttercup))
+(cons 'violet '(daisy buttercup))
+(cons 'rose '(violet daisy buttercup))
+
+(setq aaa (cons 'rose '(violet daisy buttercup)))
+
+(length aaa)
+
+nthcdr: 関数cdrに関連しており、リストのCDRを繰り返し取る
+
+(cdr (cdr '(pine fir oak maple))) ; (oak maple)
+
+;; nthcdrで同じことを行う
+(nthcdr 2 '(pine fir oak maple)) ; (oak maple)
+
+(nthcdr 0 '(pine fir oak maple)) ; (pine fir oak maple)
+(nthcdr 1 '(pine fir oak maple)) ; (fir oak maple)
+(nthcdr 2 '(pine fir oak maple)) ; (oak maple)
+(nthcdr 5 '(pine fir oak maple)) ; nil
+
+;; nthはリストの要素を1つ返します。
+(nth 0 '("one" "two" "three")) ; "one"
+(nth 1 '("one" "two" "three")) ; "two"
+
+(setq animals '(antelope giraffe lion tiger))
+animals ;=> (antelope giraffe lion tiger)
+(setcar animals 'hippopotamus)
+animals ;=> (hippopotamus giraffe lion tiger)
+
+(setq domesticated-animals '(horse cow sheep goat))
+domesticated-animals ; (horse cow sheep goat)
+
+(setcdr domesticated-animals '(cat dog))
+domesticated-animals ; (horse cat dog)
+
+(cons "another piece" 
+	  '("a piece of text" "previous piece"))
+
+(car (nthcdr 1 '("another piece"
+	 		     "a piece of text"
+				 "previous piece"))) ; "a piece of text"
+
+
+;; zap-to-charの完全なテキスト
+(defun zap-to-char (arg char)
+	   "Kill up to and including ARG'th occurrence of CHAR.
+	   Goes backward if ARG is negative; error if CHAR not found."
+	   (interactive "*p\ncZap to char: ")
+	   (kill-region (point)
+	   				(progn
+						(search-forward
+						 (char-to-string char) nil nil arg)
+						(point))))
+
+progn: 個々の引数を順番に評価して最後のものの値を返すスペシャルフォーム
+;; zap-to-charではpointを返す
+
+;; kill-regionの完全な定義
+(defun kill-region (beg end)
+	   "Kill between point and mark.
+	   The text is deleted but saved in the kill ring."
+	   (interactive "r")
+	   (condition-case nil
+	   		(let ((string (delete-and-extract-region beg end)))
+				 (when string
+				 	   (if (eq last-command 'kill-region)
+					   	   (kill-append string (< end beg))
+						  (kill-new string)))
+				 (setq this-command 'kill-region))
+		
+		((buffer-read-only text-read-only)
+			(copy-region-as-kill beg end)
+			(if kill-read-only-ok
+				(message "Read only text copied to kill ring")
+				(barf-if-buffer-read-only)
+				(signal 'text-read-only (list (current-buffer)))))))
+
+
+;; copy-region-as-kill の完全なテキスト
+(defun copy-region-as-kill (beg end)
+	   "Save the region as if killed, but don't kill it.
+	   In Transient Mark mode, deactivate the mark.
+	   If 'interprogram-cut-function' is non-nil, also save
+	   the text for a window system cut and paste."
+	   (interactive "r")
+	   (if (eq last-command 'kill-region)
+	   	   (kill-append (buffer-substring beg end) (< end beg))
+		 (kill-new (buffer-substring beg end)))
+	   (if transiend-mark-mode
+	   	   (setq deactivate-mark t))
+	   nil)
+
+;; kill-append
+(defun kill-append (string before-p)
+	   (kill-new (if before-p
+	   			 (concat string (car kill-ring))
+				 (concat (car kill-ring) string))
+				 t))
+
+;; kill-new
+(defun kill-new (string &optional replace)
+	   ""
+	   (and (fboundp 'menu-bar-update-yank-menu)
+	   		(menu-bar-update-yank-menu string (and replace (car kill-ring))))
+	   (if (and replace kill-ring)
+	   	   (setcar kill-ring string)
+		   (setq kill-ring string)
+		  (setq kill-ring (cons (string kill-ring))
+		  		(if (> (length kill-ring) kill-ring-max)
+					(setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))
+		  (setq kill-ring-yank-pointer kill-ring)
+		  (if interprogram-cut-function
+		  	  (funcall interprogram-cut-function string (not replace)))))
+
+
+(setq trees '(maple oak pine birch))
+(setcdr (nthcdr 2 trees) nil)
+trees
+
+(progn 1 2 3 4)
+
+save-restriction: カレントバッファで有効になっているナロイングを記録し、引数を評価し終えたら、もとのナロイングに戻す
+
+search-forward: 文字列を探し、それがみつかればポイントを移動する
+
+(setq bouquet '(rose violet buttercup))
+
+(setq flowers (cdr bouquet))
+
+
+bouquet        flowers
+  |              |
+  |     ___ ___  |     ___ ___      ___ ___
+   --> |   |   |  --> |   |   |    |   |   |
+       |___|___|----> |___|___|--> |___|___|--> nil
+         |              |            |
+         |              |            |
+          --> rose       --> violet   --> buttercup
+
+
+
+ 		  
+bouquet
+ |
+ |    --------------       ---------------       ----------------
+ |   | car   | cdr  |     | car    | cdr  |     | car     | cdr  |
+  -->| rose  |   o------->| violet |   o------->| butter- |  nil |
+     |       |      |     |        |      |     | cup     |      |
+      --------------       ---------------       ----------------
+
+(setq bouquet (cons 'lily bouquet))
+
+
+ 	  
+bouquet                       flowers
+  |                             |
+  |     ___ ___        ___ ___  |     ___ ___       ___ ___
+   --> |   |   |      |   |   |  --> |   |   |     |   |   |
+       |___|___|----> |___|___|----> |___|___|---->|___|___|--> nil
+         |              |              |             |
+         |              |              |             |
+          --> lily      --> rose       --> violet    --> buttercup
+
+(eq (cdr (cdr bouquet)) flowers) ;; t
+
+(eq (nthcdr 2 bouquet) flowers)
+
+
+;; while loop
+(defun triangle (number-of-rows)
+	   "Add up the number of pebbles in a triable.
+	   The first row has one pebble, the second row two pebbles,
+	   the third row three pebbles, and so on.
+	   The argument if NUMBER-OF-ROWS."
+	   (let ((total 0)
+	   		 (row-number 1))
+			 (while (<= row-number number-of-rows)
+			 		(setq total (+ total row-number))
+					(setq row-number (1+ row-number)))
+					total))
+
+(triangle 3)
+(triangle 7)
+
+;; review
+(defun triangle (number-of-rows)
+	   (let ((total 0)
+	   		 (row-number 1))
+			 (while (<= row-number number-of-rows)
+			 		(setq total (+ total row-number))
+					(setq row-number (1+ row-number)))
+					total))
+
+
+(setq animals '(gazelle dog cat))
+
+(setq animals '(gazelle giraffe lion tiger))
+(reverse animals)
+

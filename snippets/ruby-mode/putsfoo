@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: putsfoo
+# key: putsfoo
+# binding: direct-keybinding
+# --
+def foo
+  puts "foo"
+end

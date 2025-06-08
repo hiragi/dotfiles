@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dknm
+# key: dknm
+# binding: direct-keybinding
+# --
+define_key(content_buffer_normal_keymap, $1, "$2");

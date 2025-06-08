@@ -1,0 +1,146 @@
+! urxvt
+
+! URxvt*loginShell: true
+! Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
+URxvt*saveLines: 5000
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*internalBorder: 4
+
+Xft.antialias: true
+Xft.autohint: true
+Xft.hinting: true
+Xft.hintstyle: hintlight
+Xft.rgba: rgb
+Xft.pixelsize: 18
+Xft.size: 18
+
+! rxvt-unicode setup
+URxvt*termName: screen-256color
+URxvt.letterSpace: 0
+
+! Xft (X FreeType) with Bitstream, DejaVu, Liberation, or Terminus fonts:
+!  Fedora/debian packages: libXft/libxft2
+!  An anti-aliased font setup with Xft looks fantastic; it can be a bit choppy
+!  on older systems. You can always turn off anti-aliasing (antialias=false) if
+!  your terminal is sluggish. Use only ONE of the Xft pairs below:
+! Xft: DejaVu fonts
+!  Fedora/debian packages: dejavu-sans-mono-fonts/ttf-dejavu
+URxvt*font: xft:inconsolata:size=18,\
+            -*-unifont-*-*-*-18-*-*-*-*-*-*-*
+URxvt*boldFont: xft:inconsolata:size=18,\
+                -*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt*italicFont: xft:inconsolata:size=18,\
+                  -*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
+URxvt*boldItalicFont: xft:inconsolata:size=18,\
+                      -*-unifont-*-*-*-*-*-*-*-*-*-*-*-*
+
+URxvt*depth: 32
+URxvt*borderless: 1
+
+URxvt*scrollBar: false
+URxvt*scrollBar_right: false
+URxvt*scrollBar_floating: false
+URxvt*background: Black
+URxvt*foreground: White
+URxvt*colorUL: yellow
+URxvt*underlineColor: yellow
+! URxvt*geometry: 240x84
+! URxvt*loginShell: true
+! URxvt*scrollColor: #777777
+! URxvt*scrollstyle: plain
+! URxvt*scrollTtyKeypress: true
+! URxvt*scrollTtyOutput: false
+! URxvt*scrollWithBuffer: false
+! URxvt*secondaryScreen: true
+! URxvt*secondaryScroll: true
+! URxvt*skipScroll: true
+! URxvt*fading: 30
+! URxvt*utmpInhibit: false
+URxvt*urgentOnBell: true
+URxvt*visualBell: false
+! URxvt*mapAlert: true
+! URxvt*mouseWheelScrollPage: false
+! URxvt*saveLines: 0
+! URxvt*buffered: true
+! URxvt*hold: false
+! URxvt*internalBorder:
+! URxvt*print-pipe: cat > $HOME/$(echo urxvt.dump.$(date +'%Y%M%d%H%m%S'))
+
+!URxvt.copyCommand:   xsel -ib
+!URxvt.pasteCommand:  xsel -ob
+
+!-*- Perl extensions -*-
+! stored in ~/.urxvt/ext/
+URxvt.perl-ext-common: clipboard,font-size,keyboard-select,url-select,color-themes
+URxvt.url-launcher:   firefox
+URxvt.underlineURLs:  True
+URxvt.matcher.button: 1
+
+! keyboard-select
+! URxvt.keysym.M-Escape: perl:keyboard-select:activate
+! URxvt.keysym.M-s:      perl:keyboard-select:search
+
+! url-select
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.url-select.autocopy:  false ! if set to true, selected URLs are automatically copied to the PRIMARY buffer
+URxvt.url-select.launcher:  qutebrowser ! browser/command to open selected URL with
+URxvt.url-select.underline: true ! all URLs get underlined
+
+! clipboard - copy/paste selection clipboard
+URxvt.keysym.C-M-w:   perl:clipboard:copy
+URxvt.keysym.C-M-y:   perl:clipboard:paste
+URxvt.keysym.C-M-S-y: perl:clipboard:paste_escaped
+URxvt.clipboard.autocopy: true ! the clipboard is automatically updated whenever the PRIMARY selection changesx
+URxvt.clipboard.copycmd:  xsel --input --clipboard
+URxvt.clipboard.pastecmd: xsel --output --clipboard
+! URxvt.clipboard.copycmd:  xclip -in -selection clipboard
+! URxvt.clipboard.pastecmd: xclip -out -selection clipboard
+
+! font-size
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+URxvt.keysym.C-S-R:    perl:font-size:reset
+URxvt.font-size.step:  4
+! disable default binding for shift on urxvt
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
+URxvt.color-themes.themedir:  ~/.themes/urxvt
+URxvt.color-themes.preprocessor: /usr/bin/cpp
+URxvt.keysym.M-C-n:  perl:color-themes:next
+URxvt.keysym.M-C-p:  perl:color-themes:prev
+
+URxvt.color-themes.state-file: ~/.urxvt-theme
+URxvt.color-themes.autosave: 1
+URxvt.keysym.M-C-l:  perl:color-themes:load-state
+URxvt.keysym.M-C-s:  perl:color-themes:save-state
+
+! black + red
+!urxvt*color0:     #3f3f3f
+urxvt*color0:      #101010
+urxvt*color1:      #705050
+! green + yellow
+urxvt*color2:      #60b48a
+urxvt*color3:      #f0dfaf
+! blue + purple
+urxvt*color4:      #506070
+urxvt*color5:      #dc8cc3
+! cyan + white
+urxvt*color6:      #8cd0d3
+urxvt*color7:      #dcdccc
+! bright-black + bright-red
+urxvt*color8:      #000000
+urxvt*color9:      #dca3a3
+! bright-green + bright-yellow
+urxvt*color10:     #c3bf9f
+urxvt*color11:     #f0dfaf
+! bright-blue + bright-purple
+urxvt*color12:     #94bff3
+urxvt*color13:     #ec93d3
+! bright-cyan + bright-white
+urxvt*color14:     #93e0e3
+urxvt*color15:     #ffffff
+!}}}

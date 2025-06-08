@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: a
+# key: a
+# binding: direct-keybinding
+# --
+<a href="$1">$2</a>

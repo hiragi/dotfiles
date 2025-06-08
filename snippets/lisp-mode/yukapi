@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: yukapi
+# key: yukapi
+# binding: direct-keybinding
+# --
+今日の天気は$1です。明日は$2です。

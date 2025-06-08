@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@bitbucket.org:hiragi/dotfiles.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[remote "github"]
+	url = git@github.com:hiragi/dotfiles.git
+	fetch = +refs/heads/*:refs/remotes/github/*

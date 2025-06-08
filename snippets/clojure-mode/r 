@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: r
+# key: r
+# binding: direct-keybinding
+# --
+(rcopy $1)

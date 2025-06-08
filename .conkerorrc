@@ -1,0 +1,249 @@
+// -*- mode:js -*-
+
+require("new-tabs.js");
+require("session.js");
+require("feedly");
+require("gmail");
+require("clicks-in-new-buffer.js");
+
+//load_paths.unshift("~/.conkeror/js/");
+require("global-overlay-keymap.js");
+define_key_alias("C-m", "return");
+//define_key_alias("C-i", "tab");
+
+require("favicon.js");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
+
+tab_bar_show_icon = true;
+tab_bar_show_index = true;
+
+url_remoting_fn = load_url_in_new_buffer;
+
+donwload_buffer_automatic_open_target = OPEN_NEW_BUFFER_BACKGROUND;
+
+cwd = get_home_directory();
+cwd.append("downloads");
+
+//theme_load("mono");
+theme_load_paths.unshift("~/.conkeror.mozdev.org/");
+theme_load_paths.unshift("~/.conkeror/themes/");
+theme_unload("default");
+theme_load("conkeror-theme-zenburn");
+
+load_paths.unshift("chrome://conkeror-contrib/content/");
+
+homepage = "http://www.google.com";
+
+define_webjump("github", "http://github.com");
+define_webjump("bitbucket", "http://bitbucket.org");
+define_webjump("gmail", "http://gmail.com");
+define_webjump("finance", "http://finance.yahoo.co.jp");
+define_webjump("en-pool", "https://its.actindi.net/projects/iko-yo/issues?query_id=32");
+define_webjump("zerohedge", "http://zerohedge.com");
+define_webjump("matome", "matome.naver.jp");
+define_webjump("gigazine", "http://gigazine.net");
+define_webjump("amazon", "http://www.amazon.co.jp");
+define_webjump("yammer", "https://www.yammer.com");
+define_webjump("gitlab", "https://gitlab.actindi.net/");
+define_webjump("rails-api", "http://api.rubyonrails.org/");
+define_webjump("jenkins", "https://ci.actindi.net");
+define_webjump("blogos", "http://blogos.com/");
+define_webjump("jorudan", "http://jorudan.co.jp");
+define_webjump("tenki", "http://weather.yahoo.co.jp/weather/jp/13/4410.html");
+define_webjump("r", "https://its.actindi.net/projects/iko-yo/issues?query_id=43");
+define_webjump("feedly", "http://feedly.com");
+define_webjump("outing", "http://outing.actindi.net");
+define_webjump("asg", "http://asg.to/search?q=&x=52&y=17&searchVideo=true&searchPhoto=true&age=week&minimumLength=5&sort=votes&searchCategory=any");
+define_webjump("bitbucket", "https://bitbucket.org");
+define_webjump("github", "https://github.com");
+define_webjump("calendar", "https://www.google.com/calendar/render?hl=ja");
+define_webjump("rocketnews24", "http://rocketnews24.com/");
+define_webjump("youtube", "http://youtube.com");
+define_webjump("wiki", "http://wikipedia.org");
+define_webjump("measis", "https://www.measis.jp/shop/customer/menu.aspx");
+define_webjump("hatena", "http://b.hatena.ne.jp");
+define_webjump("twitter", "http://twitter.com");
+define_webjump("facebook", "http://www.facebook.com");
+define_webjump("reuters", "http://www.reuters.com/");
+define_webjump("bloomberg", "http://bloomberg.com");
+define_webjump("google", "http://www.google.com/search?q=%s");
+define_webjump("market", "http://www.bloomberg.com/markets/");
+define_webjump("share", "https://sites.google.com/a/actindi.net/share/");
+define_webjump("gunosy", "http://gunosy.com/");
+define_webjump("amagumo", "http://weather.yahoo.co.jp/weather/zoomradar/");
+define_webjump("pol", "http://protect-our-liberty.org");
+define_webjump("bi", "http://www.businessinsider.com/");
+define_webjump("hacker", "https://news.ycombinator.com/");
+define_webjump("cnbc", "http://www.cnbc.com/id/100746255?region=world");
+define_webjump("dropbox", "https://www.dropbox.com");
+define_webjump("kyuryo", "https://wps.tkc.co.jp/TKCWebPayslip/pc/SalaryPayslip.aspx");
+define_webjump("techcrunch", "http://jp.techcrunch.com/");
+define_webjump("lifehacker", "http://www.lifehacker.jp/");
+define_webjump("a", "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%s");
+define_webjump("g", "http://google.com/search?q=%s");
+define_webjump("puyopuyo", "http://www2e.biglobe.ne.jp/~k-tagami/flash/balls_as3.html");
+define_webjump("smbc", "http://www.smbc.co.jp");
+define_webjump("kai-fa", "https://sites.google.com/a/actindi.net/remote/build-environment/local-development/ikoyo-kai-fa-huan-jingno-zuori-fang");
+define_webjump("iko-yo", "http://iko-yo.net");
+
+editor_shell_command = "emacsclient -c";
+
+interactive("copy-url",
+		"Copy the current buffer's URL to the clipboard",
+		function(I){
+		var text = I.window.buffers.current.document.location.href;
+		writeToClipboard(text);
+		I.window.minibuffer.message("copied: " + text);
+		}
+	   );
+
+minibuffer_auto_complete_default = true;
+url_completion_use_history = true;
+url_completion_use_bookmarks = true;
+
+define_key(default_global_keymap, "C-c u", "copy-url");
+define_key(default_global_keymap, "C-c C-u", "copy-url");
+define_key(default_global_keymap, "C-x C-f", "find-url-new-buffer");
+define_key(default_global_keymap, "C-x f", "find-url");
+define_key(default_global_keymap, "f5", "reload");
+define_key(default_global_keymap, "C-r", "reload");
+define_key(default_global_keymap, "C-1", "unfocus");
+define_key(default_global_keymap, "C-l", "unfocus");
+define_key(default_global_keymap, "K", "kill-current-buffer");
+define_key(default_global_keymap, "C-n", "cmd_scrollLineDown");
+define_key(default_global_keymap, "C-p", "cmd_scrollLineUp");
+
+// content_buffer_normal_keymapで上書きっぽい
+define_key(content_buffer_normal_keymap, "h", "find-url-from-history-new-buffer");
+define_key(content_buffer_normal_keymap, "H", "find-url-from-history");
+define_key(content_buffer_normal_keymap, "f", "follow");
+define_key(content_buffer_normal_keymap, "l", "follow-new-buffer");
+define_key(content_buffer_normal_keymap, "T", "find-on-google");
+define_key(content_buffer_normal_keymap, "C-t", "find-on-google");
+define_key(content_buffer_normal_keymap, "C-tab", "buffer-next");
+define_key(content_buffer_normal_keymap, "C-S-tab", "buffer-previous");
+define_key(content_buffer_normal_keymap, "n", "buffer-next");
+define_key(content_buffer_normal_keymap, "p", "buffer-previous");
+define_key(content_buffer_normal_keymap, "M-right", "buffer-next");
+define_key(content_buffer_normal_keymap, "M-left", "buffer-previous");
+define_key(content_buffer_normal_keymap, "j", "forward-line");
+define_key(content_buffer_normal_keymap, "J", "forward-page");
+define_key(content_buffer_normal_keymap, "k", "backward-line");
+define_key(content_buffer_normal_keymap, "K", "backward-page");
+define_key(content_buffer_normal_keymap, "t", "open-google");
+define_key(content_buffer_normal_keymap, "x", "kill-current-buffer");
+define_key(content_buffer_normal_keymap, "g", "beginning-of-first-line");
+define_key(content_buffer_normal_keymap, "G", "end-of-last-line");
+define_key(content_buffer_normal_keymap, "u", "og");
+define_key(content_buffer_normal_keymap, "[", "back");
+define_key(content_buffer_normal_keymap, "]", "forward");
+define_key(content_buffer_normal_keymap, "b", "back");
+define_key(content_buffer_normal_keymap, "C-k", "kill-buffer");
+define_key(content_buffer_normal_keymap, "C-o", "make-window");
+define_key(content_buffer_normal_keymap, "C-<", "cmd_movePageUp");
+define_key(content_buffer_normal_keymap, "C->", "cmd_movePageDown");
+
+define_key(text_keymap, "C-h", "cmd_deleteCharBackward");
+define_key(text_keymap, "C-w", "cmd_deleteWordBackward");
+define_key(text_keymap, "C-z", "cmd_undo");
+define_key(text_keymap, "C-u", "cmd_redo");
+
+define_key(content_buffer_normal_keymap, "C-n", "cmd_scrollLineDown");
+
+hint_digits="dhutenosai";
+
+hints_minibuffer_annotation_mode(true);
+
+url_completion_use_history = true;
+
+define_browser_object_class(
+		"history-url", null,
+		function (I, prompt) {
+		check_buffer (I.buffer, content_buffer);
+		var result = yield I.buffer.window.minibuffer.read_url(
+			$prompt = prompt,  $use_webjumps = false, $use_history = true, $use_bookmarks = false);
+		yield co_return (result);
+		});
+
+define_variable("firebug_url",
+                "http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js");
+
+function firebug (I) {
+    var doc = I.buffer.document;
+    var script = doc.createElement('script');
+    script.setAttribute('type', 'text/javascript');
+    script.setAttribute('src', firebug_url);
+    script.setAttribute('onload', 'firebug.init();');
+    doc.body.appendChild(script);
+}
+interactive("firebug", "open firebug lite", firebug);
+
+add_hook("before_quit_hook",
+         function () {
+             var w = get_recent_conkeror_window();
+             var result = (w == null) ||
+                 "y" == (yield w.minibuffer.read_single_character_option(
+                     $prompt = "Quit Conkeror? (y/n)",
+                     $options = ["y", "n"]));
+             yield co_return(result);
+         });
+can_kill_last_buffer = false;
+
+interactive("search-clipboard-contents", "Search in Google the content of the selected text (or clipboard)",
+            alternates(follow_new_buffer, follow_new_window),
+            $browser_object = function(I){
+                return "google " + read_from_x_primary_selection();
+            }
+           );
+
+define_browser_object_class(
+	"search_object", null,
+	function (I, prompt) {
+		check_buffer (I.buffer, content_buffer);
+		var result = yield I.buffer.window.minibuffer.read_url(
+			$prompt = "Search on Google:",
+            $use_webjumps = true,
+            $use_history = true,
+            $use_bookmarks = true,
+            $select = true,
+            $initial_value = I.buffer.document.URL);
+		yield co_return (result);
+	});
+
+interactive("find-url-from-history-new-buffer",
+		    "Find a page from history in the current buffer",
+            alternates(follow_new_buffer, follow_new_window),
+		    $browser_object = browser_object_search_object);
+
+interactive("find-url-from-history",
+		"Find a page from history in the current buffer",
+		"find-url",
+		$browser_object = browser_object_search_object);
+
+interactive("og",
+            "",
+            "find-url",
+            $browser_object = function(I){
+                return "google";
+                }
+           );
+
+interactive("open-google",
+            "",
+            "find-url-new-buffer",
+            $browser_object = function(I){
+                return "google";
+                }
+           );
+
+
+interactive("switch-to-other-buffer",
+            "Switch to the previously open buffer",
+            function (I) {
+                var blist = I.window.buffers.buffer_history;
+                if (blist.length > 1)
+                    switch_to_buffer(I.window, blist[1]);
+            });
+
+require("dom-inspector");

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ama
+# key: ama
+# binding: direct-keybinding
+# --
+(amazon "$1")

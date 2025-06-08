@@ -1,0 +1,76 @@
+-*- org -*-
+
+* aaa
+  Zm7JtA@guigui1
+
+* stating パスワード
+　https://sites.google.com/a/actindi.net/share/sutejingu-saito-no-ninshou
+
+* いこーよ開発環境の作り方
+  https://sites.google.com/a/actindi.net/remote/build-environment/local-development/ikoyo-kai-fa-huan-jingno-zuori-fang
+
+* いこーよローカルログイン方法
+    username:sada
+    password:ikoutin@314152
+
+* MT4
+Login: 61866391
+Password: 4coubcb
+Investor: u0hnbtc
+
+* いこーよのステーングは次のアカウントでの BASIC 認証です。(include:Jenkins)
+アカウント kaicho@outing
+パスワード numomo@11358
+
+* いこーよ管理画面
+　  アカウント tahara_admin
+  　パスワード ikoutin@314152
+
+* Web給与明細
+  ID: 7dvjdp
+
+* エンジニヤチケット
+　https://its.actindi.net/projects/iko-yo/issues?query_id=32
+
+* 緊急リリースがある場合(hotfix)                                                                                                                                                                 
+  git checkout -b hotfix/yy.mm.dd.hh.mm origin/hotfix/yy.mm.dd.hh.mm
+  してから通常どおりpush
+  git pullZm7JtA@guigui1
+　git pushするときはちゃんとブランチ名を確認する。
+
+* Jenkins
+username: admin
+password: jenkins@dmin
+
+本番へのマージ
+　[11時23分26秒] Ohishi Hiroaki: 本番への反映は、「依頼者が確認→田原さんがステージングで確認→本番にデプロイ」って感じですか？
+　[11時24分10秒] 田原: orign の develop ブランチにも同時にマージしています。
+　[11時24分50秒] 田原: そうすと jenkis がステージング http://outing.actindi.net にデプロイします。
+　[11時25分27秒] 田原: 大石さんの方でステージングで確認してもらいます。
+　[11時26分06秒] 田原: 起票者にチケットに担当者を変えてステージングで修正が起票者の意図どうりだったり確認してもらいます。
+　[11時26分28秒] 田原: 問題なければ起票者がチケットを解決にします。
+　[11時26分54秒] 田原: 本番リリースして、本番で確認できたらチケットを終了にします。
+　[11時26分58秒] 田原: という感じです。
+　[11時27分08秒] Ohishi Hiroaki: 把握しました。ありがとうございます。
+　[11時27分16秒] 田原: (rock)
+　[11時27分30秒] Ohishi Hiroaki: 私のステージングのアカウントって存在しますか？
+　[11時28分15秒] 田原: ステージングも全ユーザ同じパスワードに変えあるので好きなのを使っても大丈夫です。
+　[11時28分25秒] 田原: アカウントの作成もできま。
+
+* Wifi
+  ネットワーク名（SSID）：yamaha
+  ネットワーク認証：WPA-PSK/WPA2-PSK
+  データ暗号化：Mixed
+  ネットワークキー：genRdFAKwKM8bIci  (うしろから3文字目は大文字のアイです)
+
+gitlabを使ってのワークフロー
+  https://gitlab.actindi.net/outing/outing/wikis/workflow
+* リリース環境と同じサーバ(tosa)?
+http://outing.release.actindi.net/
+* bundle exec guard でエラーが起きたとき
+echo 524288 | suod tee /proc/sys/fs/inotify/max_user_watches
+* hotfixにマージするとき
+** gco -b hotfix/yy.mm....
+** さらに派生ブランチを作成する(hotfixがdevelop代わりになる)
+** 修正後、そのブランチをhotfixにpush
+** gitlabでそのブランチをhotfixにマージリクエスト

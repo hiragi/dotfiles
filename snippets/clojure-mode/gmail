@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: gmail
+# key: gmail
+# binding: direct-keybinding
+# --
+(send-gmail
+ "sasanoha31@gmail.com" ; to
+ "$1" ;subject
+ "$2" ;body
+ )$3

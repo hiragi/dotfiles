@@ -1,0 +1,12 @@
+*.swp
+.#*
+\#scratch.clj\#
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Files containing secrets (temporary - remove after cleaning)
+misc.clj
+scratch.clj

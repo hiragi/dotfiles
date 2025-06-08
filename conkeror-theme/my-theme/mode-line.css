@@ -1,0 +1,91 @@
+.mode-line {
+    padding: 0px;
+    border: 0px none;
+    background-color: #222222;
+}
+
+.mode-line label {
+    color: white;
+}
+
+/* MINIBUFFER */
+#minibuffer, .mode-line {
+    background: #222222;
+    color: white;
+    font: 14px Tahoma;
+}
+
+#minibuffer-prompt {
+    color: #aaa;
+}
+
+#tab2-bar {
+  -moz-box-pack: end;
+  background: #222222;
+}
+
+.tab2 {
+  -moz-appearance: tab;
+  margin-top: 2px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+  border-left: 2px solid;
+  border-bottom: 1px solid ThreeDHighlight;
+  -moz-border-top-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-right-colors: ThreeDDarkShadow ThreeDShadow;
+  -moz-border-left-colors: ThreeDHighlight ThreeDLightShadow;
+  -moz-border-radius-topleft: 2px;
+  -moz-border-radius-topright: 2px;
+  -moz-border-radius-bottomright: 1px;
+  padding: 1px 4px 2px 4px;
+  background-color: -moz-Dialog;
+  color: -moz-DialogText;
+  min-width: 100px;
+  max-width: 250px;
+  -moz-box-flex: 100;
+  -moz-box-align: center;
+}
+
+.tab2[selected="true"] {
+  border-bottom-color: transparent;
+  padding: 1px 6px 4px 6px;
+  background-color: -moz-Dialog;
+}
+
+.tab2-close-button {
+  -moz-appearance: none !important;
+  list-style-image: url("chrome://global/skin/icons/close.png") !important;
+  -moz-image-region: rect(0px, 14px, 14px, 0px);
+  border: none !important;
+}
+
+.tab2[selected="false"] .tab2-close-button {
+  display: none;
+}
+
+.tab2-close-button:hover {
+  -moz-image-region: rect(0px, 28px, 14px, 14px);
+}
+
+.tab2-close-button:active:hover {
+  -moz-image-region: rect(0px, 42px, 14px, 28px);
+}
+
+.tab2-label {
+  -moz-box-flex: 100;
+  font: Tahoma;
+}
+
+.tab2[selected="true"] > .tab2-label {
+  font-weight: bold;
+  color: blue;
+}
+
+.tab2-icon  {
+  width: 16px;
+  height: 16px;
+  list-style-image: url("chrome://mozapps/skin/places/defaultFavicon.png");
+  -moz-margin-start: 4px;
+  -moz-margin-end: 3px;
+}
+

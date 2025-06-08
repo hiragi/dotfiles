@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: let template
+# key: let
+# binding: direct-keybinding
+# --
+(let (($0

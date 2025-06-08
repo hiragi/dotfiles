@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps {clj-time {:mvn/version "0.15.2"}
+        clj-http {:mvn/version "3.12.3"}
+        cheshire {:mvn/version "5.11.0"}
+        etaoin {:mvn/version "1.0.39"}
+        ring/ring-codec {:mvn/version "1.2.0"}
+        com.cloudinary/cloudinary-http44 {:mvn/version "1.29.0"}
+        org.clojure/data.json {:mvn/version "1.0.0"}
+        org.xerial/sqlite-jdbc {:mvn/version "3.30.1"}
+        clj-postgresql {:mvn/version "0.7.0"}
+        enlive {:mvn/version "1.1.6"}}}

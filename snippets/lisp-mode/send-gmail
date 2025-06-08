@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: send-gmail
+# key: send-gmail
+# binding: direct-keybinding
+# --
+
+(eval
+ (send-gmail
+  (get-account-data "$1") ; account-name without @
+  "$2" ; to
+  "$3" ; title
+  "$4") ; body
+ )$5

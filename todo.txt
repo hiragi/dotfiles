@@ -1,0 +1,73 @@
+-*- org -*-
+
+* Ubuntuで音楽を聞けるように
+http://www.youtube.com/watch?v=t7Z7eu6rT-Y
+
+* bundle update rails
+
+* notifier.rb
+なぜActionMailer::Baseではなく、Jpmobile::Mailer::Baseにしたのか？
+
+* わかっていない
+** POSTFIX + sendmailの仕組み
+** NewRelic
+
+* RailsのAPIページは常にタブに出しておく
+
+* Idea
+** TODO おもしろ画像をためておけるプールサイト
+
+
+
+
+
+* TODO 
+** 2013-12-24
+*** サービスを世の中に出す
+13953: push
+
+GAE on Clojure(appengine-magic)の調査
+映画まとめ -> 映画情報bot
+買ってよかったランキングのまとめ
+リバタリアンの情報をまとめたサイト
+モテるまとめサイト
+netcafe README
+org-mode
+sudo apt-get install 彼女
+Gackt
+amazon(hajimete no GTD)
+TED
+lexel meguro
+japone ginza
+http://www.html5rocks.com/en/
+clojure on heroku
+カプセルホテル検索サービス(AWS, heroku(staging))
+  http://www4.ocn.ne.jp/~koshigoe/capsule/
+  http://www.b-hotel.org/
+
+moe moe doubutsu
+  どーぶつ王国
+
+進撃の巨人まとめbot
+
+Docomo
+=======
+** 2013-12-26
+*** kyunodoubutsu
+*** Chrome Tab
+*** hotnews bot
+*** Egashira Youtube bot
+*** Austrian Economics bot
+** 2014-01-08
+*** JavaScriptの置き場を変える
+*** cookieを１つのモジュールにまとめる
+*** テストを書く(tags_controller_spec)
+*** redoも必要だ
+*** emacsで深夜メール送信
+
+
+* IDEA
+** Chrome Tab
+** hotnews bot
+** Egashira Youtube bot
+** Austrian Economics bot

@@ -1,0 +1,34 @@
+-*- org -*-
+
+* Rails hash
+TAHARA Yoshinori 23 minutes ago (Edited 23 minutes ago)
+最近は次のように書くのがはやりのようです。
+
+{ value: prefecture_id, expires: 30.days.from_now }
+
+* spec
+TAHARA Yoshinori 19 minutes ago
+コードはだいたい OK です。
+あとはテスト書きましょう。
+spec/controllers/facilities_controller_spec.rb
+spec/controllers/events_controller_spec.rb
+にテステ追加ですね。
+
+* redirect to
+TAHARA Yoshinori about 11 hours ago
+redirect_to events_url(prefecture_ids: [ApplicationController.helpers.get_prefecture_cookie])
+リダイレクト時は http:// からの URL を返すのが礼儀のようです。
+** spec/fixtures/*.ymlでスポットを指定する
+** controllerのテストではViewのテストはできない
+** GoogleがロードバランサのURLを拾ってしまっているので、mod_rewrite的な何かでiko-yo.netにnginxの設定でリダイレクトさせる
+** RSpecの仕様的にステートレスに処理が行われるため、Cookieが引き継がれない。そのため、手動でCookieをセットする必要がある。
+** もしStateを引き継いだ処理をするならCapybaraを使う。
+
+* Docker
+* Packer
+* Chef
+* Serf
+* Orchestration
+オーケストレーション（英: Orchestration）は、複雑なコンピュータシステム/ミドルウェア/サービスの配備/設定/管理の自動化を指す用語。
+何らかの知的制御や自律制御として議論されることが多いが、技術的解説と言うよりも大部分は単なるアナロジーである。実際には、オーケストレーションは制御理論の要素としてオートメーションやシステムの考え方を持ち込んだものと言える。
+このようなコンピュータシステムの「オーケストレーション」という用語は、仮想化やプロビジョニングの文脈で語られることが多く、バズワード的要素が強い。

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: yarimasho
+# key: yarimasho
+# binding: direct-keybinding
+# --
+
+(drakma:http-request "http://54.200.167.178:3000/todos"
+                       :method :post
+                       :external-format-in :utf-8
+                       :external-format-out :utf-8
+                       :basic-authorization '("hiragi" "coppersh")
+                       :parameters `(("todo[title]" . "$1")
+                                     ("todo[content]" . "$2")
+                                     ("todo[category_id][name]" . "$3")
+                                     ("todo[deadline(1i)]" . "$4")
+                                     ("todo[deadline(2i)]" . "$5")
+                                     ("todo[deadline(3i)]" . "$6")
+                                     ("todo[deadline(4i)]" . "$7")
+                                     ("todo[deadline(5i)]" . "$8")))$9

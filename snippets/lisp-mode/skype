@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: skype
+# key: skype
+# binding: direct-keybinding
+# --
+
+(defparameter *contact-list*
+  '((1 "hiragi.auzee" "#hiroaki-ohishi/$hiragi.auzee;9fa333847b381a5f")
+    (2 "onsen-bu" "#yamamoto-to/$9b29dbf41f9a748f")
+    (3 "hirokun" "#shimane526/$6df3db239582197a")
+    (4 "actindi all" "#actindi-skype/$tahara.actindi;69bb838f0a9ed796")
+    (5 "actindi system" "#actindi-skype/$maskypeaomi;3caa584bf007a342")
+    (6 "suzuki san" "hiroaki-ohishi/$actsuzuki;c05a8e5e718516a1")
+    (7 "tomomin" "#hiroaki-ohishi/$takeyamatomomi;dc35181bf67e1252")
+    (8 "jenkins" "#actindi-skype/$hiroaki-ohishi;8be703476e395e2e")))
+
+(send-chat (select-contact $1) "$2")

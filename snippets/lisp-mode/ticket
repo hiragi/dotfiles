@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: ticket
+# key: ticket
+# binding: direct-keybinding
+# --
+(create-ticket
+ :subject "$1"
+ :description "
+ 
+h2. 経緯
+
+$2
+
+h2. いつまで
+
+$3
+
+h2. どこを
+
+$4
+
+h2. やること
+
+$5
+ 
+ ")$6

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: div h4
+# key: div4
+# binding: direct-keybinding
+# --
+<div class="section" id="$1">
+  <h4>$2</h4>
+  $0
+</div> <!-- $1 -->

@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# inotify-git
+#
+# 対象ディレクトリを再帰的に監視し、
+# 変更をすべて git で自動コミットする
+#
+# 再起動しても勝手に監視させるには
+# /etc/rc.local に
+# /path/to/inotify-git directory &
+# を書いておく
+# 初回起動は nohup /path/to/inotify-git > out.log 2> err.log < /dev/null &
+ 
+#
+# 監視対象から外したいものは.gitignoreに入れ,
+# inotifywait の --exclude オプションで監視しないようにする
+# inotifyのmax_user_watchesのデフォルト値は 8192 なので 増やしたい時は
+# /proc/sys/fs/inotify/max_user_watches を変更する
+ 
+if [ $# -ne 1 ]; then
+   echo "Usage: inotify-git direcotory"
+   exit 1
+fi
+ 
+# gitで自動更新したいディレクトリを指定
+INOTIFY_GIT_CHECK_DIRECTORY=$1
+ 
+while true; do
+    inotifywait -r -qq -e create,delete,modify,move \
+        --exclude '.*\.git/.*' \
+        --exclude '.#' \
+        ${INOTIFY_GIT_CHECK_DIRECTORY};
+    if [ -e ${INOTIFY_GIT_CHECK_DIRECTORY}/inotify-sleep ]; then
+        sleep 300;
+    else
+        cd ${INOTIFY_GIT_CHECK_DIRECTORY};
+        git add -A > /dev/null 2>&1;
+        git commit -m 'auto commit' > /dev/null 2>&1
+        git push origin master > /dev/null 2>&1
+    fi
+done

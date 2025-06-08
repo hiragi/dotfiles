@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: drakma
+# key: drakma
+# binding: direct-keybinding
+# --
+(ql:quickload :drakma)
+
+(multiple-value-bind (html)
+    (flexi-streams:octets-to-string
+     (drakma:http-request "$1"))
+  html)

@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/Users/user/dotfiles/.vim/bundle/nerdtree/plugin'
+let g:netrw_dirhist_2='/home/hiroaki/dotfiles/gitflow'
+let g:netrw_dirhist_3='/home/hiroaki/mywork/jruby/rails3/app'
+let g:netrw_dirhist_4='/home/hiroaki/.config/google-chrome/Default/Extensions/okneonigbfnolfkmfgjmaeniipdjkgkl/1.14.0_0/js'
+let g:netrw_dirhist_5='/home/hiroaki/work/outing/app/views/topics/shellfish'
+let g:netrw_dirhist_6='/home/hiroaki/work/outing/public'
+let g:netrw_dirhist_7='/home/hiroaki/work/outing/config/deploy'
+let g:netrw_dirhist_8='/home/hiroaki/work/outing/config/initializers'
+let g:netrw_dirhist_9='/mnt/samba/みんなの物置/いこーよ物置/00売上'

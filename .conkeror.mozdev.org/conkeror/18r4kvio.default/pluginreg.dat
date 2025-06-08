@@ -1,0 +1,34 @@
+Generated File. Do not edit.
+
+[HEADER]
+Version:0.16:$
+Arch:x86-gcc3:$
+
+[PLUGINS]
+libflashplayer.so:$
+/usr/lib/flashplugin-installer/libflashplayer.so:$
+11,2,202,336:$
+1392856091000:0:0:$
+Shockwave Flash 11.2 r202:$
+Shockwave Flash:$
+2
+0:application/x-shockwave-flash:Shockwave Flash:swf:$
+1:application/futuresplash:FutureSplash Player:spl:$
+librhythmbox-itms-detection-plugin.so:$
+/usr/lib/mozilla/plugins/librhythmbox-itms-detection-plugin.so:$
+:$
+1368697347000:0:0:$
+This plug-in detects the presence of iTunes when opening iTunes Store URLs in a web page with Firefox.:$
+iTunes Application Detector:$
+1
+0:application/itunes-plugin:::$
+
+[INVALID]
+/usr/lib/mozilla/plugins/libtotem-narrowspace-plugin.so:$
+1369542124000:$
+/usr/lib/mozilla/plugins/libtotem-gmp-plugin.so:$
+1369542124000:$
+/usr/lib/mozilla/plugins/libtotem-cone-plugin.so:$
+1369542124000:$
+/usr/lib/mozilla/plugins/libtotem-mully-plugin.so:$
+1369542124000:$
