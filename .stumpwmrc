@@ -356,6 +356,7 @@
 (defbookmark binance "https://www.binance.com/en/my/dashboard")
 (defbookmark chatgpt "https://chatgpt.com/?model=o3-mini-high")
 (defbookmark hamusoku "https://hamusoku.com/")
+(defbookmark cabinas "http://cabinas.jp/")
 (defbookmark perplexity "https://www.perplexity.ai/")
 (defbookmark genspark "https://www.genspark.ai/")
 (defbookmark password-generator "https://www.graviness.com/app/pwg/")
