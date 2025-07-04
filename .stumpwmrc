@@ -1250,6 +1250,9 @@
 (defcommand copy-interview-ng () ()
   (run-shell-command "cat /home/hiroaki/dotfiles/interview-ng.txt | xclip -selection clipboard"))
 
+(defcommand copy-shingo-image () ()
+  (run-shell-command "echo -n '![](https://res.cloudinary.com/dji1fbn25/image/upload/v1751627937/blender_thumbnails/shingo.jpg)' | xclip -selection clipboard"))
+
 (defcommand kansha () ()
   (let* ((url '("http://blog-imgs-48.fc2.com/s/p/r/springfever999/20120102044842f69.jpg"
                 "http://cdn-ak.f.st-hatena.com/images/fotolife/t/tsujimotter/20150116/20150116013708.jpg"
